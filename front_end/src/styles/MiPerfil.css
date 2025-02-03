@@ -1,0 +1,35 @@
+/* Estilos para el componente Mi Perfil */
+.mi-perfil-container {
+    display: flex;
+    height: calc(100vh - 56px - 56px); /* Altura total menos el navbar y el footer */
+  }
+  
+  .menu-container {
+    width: 20%;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  
+  .profile-container {
+    width: 80%;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  
+  .list-group-item {
+    cursor: pointer;
+  }
+  
+  .list-group-item.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .profile-section {
+    margin-bottom: 2rem;
+  }
+  
+  .profile-section h2 {
+    margin-bottom: 1rem;
+  }

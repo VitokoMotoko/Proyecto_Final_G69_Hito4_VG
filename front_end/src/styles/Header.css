@@ -1,0 +1,24 @@
+/* Estilos para el componente Header */
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem;
+  }
+  
+  .header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .header nav .btn-link {
+    color: white;
+  }
+  
+  .header .form-control {
+    display: inline-block;
+    width: auto;
+  }
+  
+  .header .btn-light {
+    margin-left: 0.5rem;
+  }

@@ -1,0 +1,29 @@
+/* Estilos para el componente Navbar */
+.navbar {
+    background-color: #007bff;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: auto; /* Mueve el logo al extremo derecho */
+  }
+  
+  .nav-link {
+    color: white !important;
+  }
+  
+  .form-control {
+    display: inline-block;
+    width: auto;
+    margin-left: 20px; /* Agrega un margen izquierdo para separar el buscador */
+  }
+  
+  .navbar-nav {
+    flex: 1;
+    justify-content: center; /* Centra los enlaces de navegación */
+  }
+  
+  .btn-light {
+    margin-left: 0.5rem;
+  }

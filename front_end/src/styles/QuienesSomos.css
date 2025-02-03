@@ -1,0 +1,14 @@
+/* Estilos para el componente Quienes Somos */
+.quienes-somos-container {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .quienes-somos-container h1 {
+    margin-bottom: 1rem;
+  }
+  
+  .quienes-somos-container p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
