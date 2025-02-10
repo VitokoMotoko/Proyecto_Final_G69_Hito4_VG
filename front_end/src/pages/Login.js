@@ -1,25 +1,34 @@
 import React, { useState, useContext } from 'react';
-import '../styles/Login.css';
-import { getUserByEmailAndPassword } from '../BD_Temporal';
-import { GlobalContext } from '../context/GlobalState';
 import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../context/GlobalState';
+import '../styles/Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [state, { login }] = useContext(GlobalContext);
+  const [, { login }] = useContext(GlobalContext); // Eliminar 'state' si no se usa
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = getUserByEmailAndPassword(email, password);
+    try {
+      const response = await fetch('http://localhost:4000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (user) {
-      login(user);
-      alert('Inicio de sesión exitoso');
+      if (!response.ok) {
+        throw new Error('Email o contraseña incorrectos');
+      }
+
+      const data = await response.json();
+      login(data.user); // Iniciar sesión con los datos del usuario
       navigate('/mi-perfil');
-    } else {
-      alert('Email o contraseña incorrectos');
+    } catch (error) {
+      alert(error.message);
     }
   };
 
@@ -46,8 +55,7 @@ const Login = () => {
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+            />
         </div>
         <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
       </form>

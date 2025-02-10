@@ -7,6 +7,10 @@ const MiPerfil = () => {
   const { user } = state;
   const [activeSection, setActiveSection] = useState('datos');
 
+  if (!user) {
+    return <p>No has iniciado sesión.</p>;
+  }
+
   return (
     <div className="mi-perfil-container">
       <aside className="menu-container">

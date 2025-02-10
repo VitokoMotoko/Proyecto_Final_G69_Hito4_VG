@@ -9,7 +9,6 @@ const GlobalState = ({ children }) => {
     isAuthenticated: false,
     user: null,
     cart: [],
-    // Define tu estado global aquí
   });
 
   const login = (user) => {

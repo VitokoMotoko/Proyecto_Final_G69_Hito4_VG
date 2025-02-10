@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
 const ProductCard = ({ image, title, price }) => {
-  const [state, { addToCart }] = useContext(GlobalContext);
+  const [, { addToCart }] = useContext(GlobalContext); // Eliminar 'state' si no se usa
 
   const handleAddToCart = () => {
     const product = { image, title, price };

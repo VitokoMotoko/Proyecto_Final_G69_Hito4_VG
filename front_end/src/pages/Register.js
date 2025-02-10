@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Register.css';
-import { addUser, getUserByEmail, getUserByNickname } from '../BD_Temporal';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,7 @@ const Register = () => {
     password: ''
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -20,30 +21,37 @@ const Register = () => {
     });
   };
 
+  const registerUser = async (userData) => {
+    try {
+      const response = await fetch('http://localhost:4000/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setErrors(errorData);
+        return;
+      }
+
+      const data = await response.json();
+      console.log('Usuario registrado:', data);
+      setErrors({});
+      
+      // Mostrar mensaje de éxito y redirigir al home
+      alert('Cuenta creada exitosamente');
+      navigate('/');
+    } catch (error) {
+      console.error('Error al registrar usuario:', error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, nickname } = formData;
-    const emailExists = getUserByEmail(email);
-    const nicknameExists = getUserByNickname(nickname);
-
-    if (emailExists || nicknameExists) {
-      setErrors({
-        email: emailExists ? 'El email ya está en uso' : '',
-        nickname: nicknameExists ? 'El nickname ya está en uso' : ''
-      });
-    } else {
-      addUser(formData);
-      alert('Usuario registrado con éxito');
-      setFormData({
-        nombre: '',
-        apellido: '',
-        nickname: '',
-        fechaNacimiento: '',
-        email: '',
-        password: ''
-      });
-      setErrors({});
-    }
+    registerUser(formData);
   };
 
   return (

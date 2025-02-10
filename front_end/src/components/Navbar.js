@@ -1,12 +1,18 @@
 import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 import { GlobalContext } from '../context/GlobalState';
 
 const Navbar = () => {
   const location = useLocation();
-  const [state] = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const [state, { logout }] = useContext(GlobalContext);
   const { isAuthenticated, cart } = state;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -52,7 +58,7 @@ const Navbar = () => {
             <input className="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" />
           </form>
           <ul className="navbar-nav ml-auto">
-            {!isAuthenticated && (
+            {!isAuthenticated ? (
               <>
                 <li className="nav-item d-none d-lg-block">
                   <Link className="btn btn-light mx-1" to="/login">Iniciar Sesión</Link>
@@ -67,6 +73,10 @@ const Navbar = () => {
                   <Link className="nav-link" to="/register">Registrarse</Link>
                 </li>
               </>
+            ) : (
+              <li className="nav-item">
+                <button className="btn btn-light mx-1" onClick={handleLogout}>Cerrar Sesión</button>
+              </li>
             )}
           </ul>
         </div>
