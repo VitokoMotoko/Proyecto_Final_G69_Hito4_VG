@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 import { GlobalContext } from '../context/GlobalState';
 
-
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,9 +17,10 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
-      <Link className="navbar-brand ml-auto" to="/">
-  <img src="/images/LOGO.png" alt="Mi Logo" style={{ height: '15px' }} />
-</Link>        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <Link className="navbar-brand ml-auto" to="/">
+          <img src="/images/LOGO.png" alt="Mi Logo" style={{ height: '15px' }} />
+        </Link>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
