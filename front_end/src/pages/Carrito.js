@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import '../styles/Carrito.css';
 import { GlobalContext } from '../context/GlobalState';
+import { useNavigate } from 'react-router-dom';
 
 const Carrito = () => {
   const [state, { updateCartQuantity, removeFromCart }] = useContext(GlobalContext);
   const { cart } = state;
+  const navigate = useNavigate();
 
   const handleQuantityChange = (title, quantity) => {
     if (quantity > 0) {
@@ -17,6 +19,10 @@ const Carrito = () => {
   };
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const handlePagar = () => {
+    navigate('/pago');
+  };
 
   return (
     <div className="carrito-container">
@@ -51,7 +57,7 @@ const Carrito = () => {
           </div>
           <div className="cart-total">
             <h3>Total de la compra: ${total.toFixed(2)}</h3>
-            <button className="btn btn-primary">Pagar</button>
+            <button className="btn btn-primary" onClick={handlePagar}>Pagar</button>
           </div>
         </div>
       )}

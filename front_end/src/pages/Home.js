@@ -20,9 +20,9 @@ const Home = () => {
     <div className="home-container">
       <aside className="menu-container">
         <ul className="list-group">
-          <li className="list-group-item">Categoría 1</li>
-          <li className="list-group-item">Categoría 2</li>
-          <li className="list-group-item">Categoría 3</li>
+          <li className="list-group-item">Productos Recientes</li>
+          <li className="list-group-item">Más Vendidos</li>
+          <li className="list-group-item">Mejor Valorado</li>
         </ul>
       </aside>
       {/* Esto es temporal.. según diseño aún no sé si lo dejaré */}

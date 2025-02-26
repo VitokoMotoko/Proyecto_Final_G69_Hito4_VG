@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ import Register from './pages/Register';
 import MiPerfil from './pages/MiPerfil';
 import Carrito from './pages/Carrito';
 import ProductPage from './pages/ProductPage';
-import MProductos from './pages/MProductos'; // Importa el componente MProductos
+import Pago from './pages/Pago'; // Importa el componente Pago
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
             <Route path="/mi-perfil" element={<MiPerfil />} />
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/productos/:id" element={<ProductPage />} />
-            <Route path="/admin/productos" element={<MProductos />} /> {/* Añade la ruta para MProductos */}
+            <Route path="/pago" element={<Pago />} /> {/* Añade la ruta para Pago */}
           </Routes>
         </div>
         <Footer />
