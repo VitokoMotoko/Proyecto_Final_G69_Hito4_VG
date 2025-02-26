@@ -7,7 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [state, { logout }] = useContext(GlobalContext);
-  const { isAuthenticated, cart } = state;
+  const { isAuthenticated, user, cart } = state;
 
   const handleLogout = () => {
     logout();
@@ -33,25 +33,32 @@ const Navbar = () => {
                 <Link className="nav-link" to="/productos">Productos</Link>
               </li>
             )}
-            {location.pathname !== '/quienes-somos' && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/quienes-somos">Quienes Somos</Link>
-              </li>
-            )}
-            {location.pathname !== '/contacto' && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/contacto">Contacto</Link>
-              </li>
-            )}
-            {isAuthenticated && location.pathname !== '/mi-perfil' && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/mi-perfil">Mi Perfil</Link>
-              </li>
-            )}
-            {location.pathname !== '/carrito' && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/carrito">Carrito ({cart.length})</Link>
-              </li>
+            {isAuthenticated && user.role === 'admin' ? (
+              <>
+                {location.pathname !== '/admin/productos' && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/admin/productos">Crear Productos</Link>
+                  </li>
+                )}
+              </>
+            ) : (
+              <>
+                {location.pathname !== '/quienes-somos' && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/quienes-somos">Quienes Somos</Link>
+                  </li>
+                )}
+                {location.pathname !== '/contacto' && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/contacto">Contacto</Link>
+                  </li>
+                )}
+                {location.pathname !== '/carrito' && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/carrito">Carrito ({cart.length})</Link>
+                  </li>
+                )}
+              </>
             )}
           </ul>
           <form className="form-inline my-2 my-lg-0 mx-3">

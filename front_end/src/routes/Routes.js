@@ -8,6 +8,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import MiPerfil from '../pages/MiPerfil';
 import Carrito from '../pages/Carrito';
+import ProductPage from '../pages/ProductPage'; // Importa el componente ProductPage
 import Export from '../Export'; // Importa el componente Export
 
 const AppRoutes = () => {
@@ -21,6 +22,7 @@ const AppRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/mi-perfil" element={<MiPerfil />} />
       <Route path="/carrito" element={<Carrito />} />
+      <Route path="/productos/:id" element={<ProductPage />} /> {/* Añade la ruta para ProductPage */}
       <Route path="/export" element={<Export />} /> {/* Añade la ruta para Export */}
       
     </Routes>

@@ -1,0 +1,26 @@
+.mproductos-container {
+    padding: 2rem;
+  }
+  
+  .add-product-form {
+    margin-bottom: 2rem;
+  }
+  
+  .product-list {
+    margin-top: 2rem;
+  }
+  
+  .product-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+  
+  .product-item p {
+    margin: 0.5rem 0;
+  }
+  
+  .product-item .btn-danger {
+    margin-top: 1rem;
+  }

@@ -6,7 +6,7 @@ import '../styles/Login.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [, { login }] = useContext(GlobalContext); // Eliminar 'state' si no se usa
+  const [, { login }] = useContext(GlobalContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,15 +19,20 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
+      const text = await response.text();
+      console.log('Respuesta del servidor:', text);
+  
       if (!response.ok) {
         throw new Error('Email o contraseña incorrectos');
       }
-
-      const data = await response.json();
-      login(data.user); // Iniciar sesión con los datos del usuario
+  
+      const data = JSON.parse(text);
+      localStorage.setItem('token', data.token); // Almacena el token en localStorage
+      login(data.user);
       navigate('/mi-perfil');
     } catch (error) {
+      console.error('Error al iniciar sesión:', error);
       alert(error.message);
     }
   };
@@ -55,7 +60,8 @@ const Login = () => {
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            />
+            required
+          />
         </div>
         <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
       </form>

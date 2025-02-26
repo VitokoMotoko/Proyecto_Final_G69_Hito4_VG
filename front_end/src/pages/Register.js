@@ -51,6 +51,10 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.fechaNacimiento) {
+      alert('Por favor, ingresa tu fecha de nacimiento.');
+      return;
+    }
     registerUser(formData);
   };
 
@@ -129,8 +133,7 @@ const Register = () => {
             className="form-control"
             value={formData.password}
             onChange={handleChange}
-            required
-          />
+            />
         </div>
         <button type="submit" className="btn btn-primary">Registrarse</button>
       </form>
