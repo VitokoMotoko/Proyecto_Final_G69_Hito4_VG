@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
         <Link className="navbar-brand ml-auto" to="/">
-          <img src="/images/LOGO.png" alt="Mi Logo" style={{ height: '15px' }} />
+          <img src="/images/LOGO.png" alt="Mi Logo" style={{ height: 'px' }} />
         </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

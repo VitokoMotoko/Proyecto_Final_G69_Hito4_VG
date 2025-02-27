@@ -6,12 +6,12 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('recientes');
 
   const products = [
-    { image: 'AB.jpg', title: 'Victorinox AB', price: 10.00, sold: 50, rating: 4.5, date: '2025-01-01' },
-    { image: 'Guantes_Pesca.jpg', title: 'Guantes de Pesca', price: 20.00, sold: 30, rating: 4.0, date: '2025-02-01' },
-    { image: 'H_Camo.jpg', title: 'Victorinox Huntsman Camo', price: 30.00, sold: 70, rating: 4.8, date: '2025-03-01' },
-    { image: 'Hunter_red.jpg', title: 'Victorinox Hunter Red', price: 40.00, sold: 20, rating: 3.5, date: '2025-04-01' },
-    { image: 'KIT_SOS.jpg', title: 'Kit SOS', price: 50.00, sold: 90, rating: 4.9, date: '2025-05-01' },
-    { image: 'NClip.jpg', title: 'Victorinox Nail Clip 580', price: 60.00, sold: 10, rating: 3.0, date: '2025-06-01' },
+    { id: 1, image: 'AB.jpg', title: 'Victorinox AB', price: 10.00, sold: 50, rating: 4.5, date: '2025-01-01' },
+    { id: 2, image: 'Guantes_Pesca.jpg', title: 'Guantes de Pesca', price: 20.00, sold: 30, rating: 4.0, date: '2025-02-01' },
+    { id: 3, image: 'H_Camo.jpg', title: 'Victorinox Huntsman Camo', price: 30.00, sold: 70, rating: 4.8, date: '2025-03-01' },
+    { id: 4, image: 'Hunter_red.jpg', title: 'Victorinox Hunter Red', price: 40.00, sold: 20, rating: 3.5, date: '2025-04-01' },
+    { id: 5, image: 'KIT_SOS.jpg', title: 'Kit SOS', price: 50.00, sold: 90, rating: 4.9, date: '2025-05-01' },
+    { id: 6, image: 'NClip.jpg', title: 'Victorinox Nail Clip 580', price: 60.00, sold: 10, rating: 3.0, date: '2025-06-01' },
     // Agrega más productos aquí
   ];
 

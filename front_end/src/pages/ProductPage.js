@@ -14,17 +14,47 @@ const ProductPage = () => {
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`http://localhost:4000/api/products/${id}`)
-      .then(response => response.json())
-      .then(data => {
-        if (isMounted) setProduct(data);
-      });
 
-    fetch(`http://localhost:4000/api/products/${id}/comments`)
-      .then(response => response.json())
-      .then(data => {
-        if (isMounted) setComments(data);
-      });
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/api/products/${id}`);
+        const text = await response.text();
+        console.log('Respuesta del servidor (producto):', text); // Agrega esta línea para depuración
+        if (!response.ok) {
+          throw new Error('Error al obtener el producto');
+        }
+        if (text) {
+          const data = JSON.parse(text);
+          if (isMounted) setProduct(data);
+        } else {
+          console.error('Respuesta vacía del servidor');
+        }
+      } catch (error) {
+        console.error('Error al obtener el producto:', error);
+      }
+    };
+
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/api/products/${id}/comments`);
+        const text = await response.text();
+        console.log('Respuesta del servidor (comentarios):', text); // Agrega esta línea para depuración
+        if (!response.ok) {
+          throw new Error('Error al obtener los comentarios');
+        }
+        if (text) {
+          const data = JSON.parse(text);
+          if (isMounted) setComments(data);
+        } else {
+          console.error('Respuesta vacía del servidor');
+        }
+      } catch (error) {
+        console.error('Error al obtener los comentarios:', error);
+      }
+    };
+
+    fetchProduct();
+    fetchComments();
 
     return () => {
       isMounted = false;
@@ -38,25 +68,36 @@ const ProductPage = () => {
       return;
     }
 
-    const response = await fetch(`http://localhost:4000/api/products/${id}/comments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ comentario: newComment, calificacion: rating }),
-    });
+    if (!newComment.trim() || rating <= 0) {
+      alert('Por favor, ingresa un comentario y una calificación válida.');
+      return;
+    }
 
-    if (response.ok) {
-      const newComment = await response.json();
-      setComments([...comments, newComment]);
+    try {
+      const response = await fetch(`http://localhost:4000/api/products/${id}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ comentario: newComment, calificacion: rating }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el comentario');
+      }
+
+      const newCommentData = await response.json();
+      setComments([...comments, newCommentData]);
       setNewComment('');
       setRating(0);
+    } catch (error) {
+      console.error('Error al enviar el comentario:', error);
     }
   };
 
   return (
     <div className="product-page">
-      {product && (
+      {product ? (
         <>
           <h1>{product.nombre}</h1>
           <img src={`/images/${product.image}`} alt={product.nombre} />
@@ -76,7 +117,8 @@ const ProductPage = () => {
             <form onSubmit={handleCommentSubmit}>
               <div>
                 <label>Calificación:</label>
-                <select value={rating} onChange={(e) => setRating(e.target.value)}>
+                <select value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
+                  <option value="0">Selecciona una calificación</option>
                   <option value="1">1 estrella</option>
                   <option value="2">2 estrellas</option>
                   <option value="3">3 estrellas</option>
@@ -92,6 +134,8 @@ const ProductPage = () => {
             </form>
           )}
         </>
+      ) : (
+        <p>Cargando producto...</p>
       )}
     </div>
   );
