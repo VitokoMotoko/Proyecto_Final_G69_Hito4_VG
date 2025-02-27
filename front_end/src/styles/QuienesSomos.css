@@ -1,14 +1,21 @@
-/* Estilos para el componente Quienes Somos */
 .quienes-somos-container {
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  .quienes-somos-container h1 {
-    margin-bottom: 1rem;
-  }
-  
-  .quienes-somos-container p {
-    font-size: 1.2rem;
-    line-height: 1.5;
-  }
+  text-align: center;
+  padding: 2rem;
+}
+
+.quienes-somos-container h1 {
+  margin-bottom: 1rem;
+}
+
+.quienes-somos-container p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem; /* Añade espacio entre los párrafos */
+}
+
+.quienes-somos-image {
+  display: block;
+  margin: 2rem auto;
+  max-width: 50%; /* Ajusta este valor según el tamaño deseado */
+  height: auto;
+}

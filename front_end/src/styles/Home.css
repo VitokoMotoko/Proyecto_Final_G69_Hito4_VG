@@ -1,48 +1,61 @@
 /* Estilos para el componente Home */
 .home-container {
-    display: flex;
-    height: calc(100vh - 56px - 56px); /* Altura total menos el navbar y el footer */
-  }
-  
-  .menu-container {
-    width: 20%;
-    background-color: #f8f9fa;
-    padding: 1rem;
-    overflow-y: auto;
-  }
-  
-  .products-container {
-    width: 80%;
-    padding: 1rem;
-    overflow-y: auto;
-  }
-  
-  .products-container h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .products-grid {
-    max-height: 70vh; /* Ajusta la altura máxima del contenedor */
-    overflow-y: auto; /* Agrega scrollbar vertical */
-    border: 1px solid #ddd;
-    padding: 1rem;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .card {
-    width: 150px; /* Ajusta el tamaño de las tarjetas */
-    height: 180px; /* Ajusta la altura de las tarjetas */
-    margin: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .card img {
-    height: 100px; /* Ajusta la altura de las imágenes */
-    object-fit: cover;
-  }
+  display: flex;
+  height: calc(100vh - 56px - 56px); /* Altura total menos el navbar y el footer */
+}
+
+.menu-container {
+  width: 20%;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.products-container {
+  width: 80%;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.products-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.products-grid {
+  max-height: 70vh; /* Ajusta la altura máxima del contenedor */
+  overflow-y: auto; /* Agrega scrollbar vertical */
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 150px; /* Ajusta el tamaño de las tarjetas */
+  height: 180px; /* Ajusta la altura de las tarjetas */
+  margin: 0.25rem; /* Reduce el margen para acercar las tarjetas */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* Centra el contenido horizontalmente */
+}
+
+.card img {
+  height: 100px; /* Ajusta la altura de las imágenes */
+  object-fit: cover;
+}
+
+.card-title {
+  text-align: center; /* Centra el texto del título */
+}
+
+.card-text {
+  text-align: center; /* Centra el texto del precio */
+}
+
+.card button {
+  align-self: center; /* Centra el botón */
+}

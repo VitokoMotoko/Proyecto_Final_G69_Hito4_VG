@@ -1,11 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Contacto.css';
 
 const Contacto = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Mensaje enviado');
+    navigate('/');
+  };
+
   return (
     <div className="contacto-container">
       <h1>Contacto</h1>
-      <form className="contacto-form">
+      <form className="contacto-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nombre">Nombre</label>
           <input type="text" id="nombre" className="form-control" placeholder="Tu nombre" required />
