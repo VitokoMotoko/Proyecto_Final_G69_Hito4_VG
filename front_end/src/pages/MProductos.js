@@ -10,24 +10,11 @@ const MProductos = () => {
     stock: 100,
     image: ''
   });
-  const [images, setImages] = useState([]); // Inicializar como array vacío
 
   useEffect(() => {
     fetch('http://localhost:4000/api/products')
       .then(response => response.json())
       .then(data => setProducts(data));
-
-    // Fetch the list of images from the backend
-    fetch('http://localhost:4000/api/images')
-      .then(response => response.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          setImages(data);
-        } else {
-          console.error('La respuesta de la API no es un array:', data);
-        }
-      })
-      .catch(error => console.error('Error al obtener imágenes:', error));
   }, []);
 
   const handleInputChange = (e) => {
@@ -127,20 +114,16 @@ const MProductos = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="image">Imagen</label>
-          <select
+          <label htmlFor="image">URL de la Imagen</label>
+          <input
+            type="text"
             id="image"
             name="image"
             className="form-control"
             value={newProduct.image}
             onChange={handleInputChange}
             required
-          >
-            <option value="">Selecciona una imagen</option>
-            {images.map((image, index) => (
-              <option key={index} value={image}>{image}</option>
-            ))}
-          </select>
+          />
         </div>
         <button type="submit" className="btn btn-primary">Agregar Producto</button>
       </form>
@@ -150,7 +133,7 @@ const MProductos = () => {
             <p><strong>{product.nombre}</strong></p>
             <p>{product.descripcion}</p>
             <p>Precio: ${product.precio}</p>
-            <img src={`/images/${product.image}`} alt={product.nombre} />
+            <img src={product.image} alt={product.nombre} />
             <button className="btn btn-danger" onClick={() => handleDeleteProduct(product.id_producto)}>Eliminar</button>
           </div>
         ))}

@@ -14,7 +14,7 @@ const ProductCard = ({ id, image, title, price }) => {
     <div className="col-md-4 d-flex justify-content-center">
       <div className="card">
         <Link to={`/productos/${id}`}>
-          <img src={`/images/${image}`} className="card-img-top" alt={title} />
+          <img src={image} className="card-img-top" alt={title} />
         </Link>
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
