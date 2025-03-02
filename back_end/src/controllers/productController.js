@@ -29,12 +29,17 @@ const addProductComment = async (req, res) => {
     return res.status(403).json({ error: 'Usuario no autenticado' });
   }
 
-  const result = await pool.query(
-    'INSERT INTO comentarios (id_user, id_producto, comentario, calificacion) VALUES ($1, $2, $3, $4) RETURNING *',
-    [userId, id, comentario, calificacion]
-  );
+  try {
+    const result = await pool.query(
+      'INSERT INTO comentarios (id_user, id_producto, comentario, calificacion) VALUES ($1, $2, $3, $4) RETURNING *',
+      [userId, id, comentario, calificacion]
+    );
 
-  res.json(result.rows[0]);
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error al agregar comentario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 };
 
 const addProduct = async (req, res) => {

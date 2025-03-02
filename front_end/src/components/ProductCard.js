@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
+import { formatPrice } from '../utils'; // Importa la función de formateo
 
 const ProductCard = ({ id, image, title, price }) => {
   const [, { addToCart }] = useContext(GlobalContext);
@@ -8,11 +9,6 @@ const ProductCard = ({ id, image, title, price }) => {
   const handleAddToCart = () => {
     const product = { id, image, title, price };
     addToCart(product);
-  };
-
-  // Función para formatear el precio en moneda chilena sin decimales
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 }).format(price);
   };
 
   return (
@@ -23,7 +19,7 @@ const ProductCard = ({ id, image, title, price }) => {
         </Link>
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
-          <p className="card-text">{formatPrice(price)}</p>
+          <p className="card-text">{formatPrice(price)}</p> {/* Usa la función de formateo */}
           <button className="btn btn-primary" onClick={handleAddToCart}>Comprar</button>
         </div>
       </div>
