@@ -8,7 +8,8 @@ const MProductos = () => {
     descripcion: '',
     precio: '',
     stock: 100,
-    image: ''
+    image: '',
+    fecha_creacion: new Date().toISOString().split('T')[0] // Fecha actual por defecto
   });
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const MProductos = () => {
     if (response.ok) {
       const product = await response.json();
       setProducts([...products, product]);
-      setNewProduct({ nombre: '', descripcion: '', precio: '', stock: 100, image: '' });
+      setNewProduct({ nombre: '', descripcion: '', precio: '', stock: 100, image: '', fecha_creacion: new Date().toISOString().split('T')[0] });
     } else {
       console.error('Error al agregar producto:', response.statusText);
     }
@@ -121,6 +122,18 @@ const MProductos = () => {
             name="image"
             className="form-control"
             value={newProduct.image}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="fecha_creacion">Fecha de Creación</label>
+          <input
+            type="date"
+            id="fecha_creacion"
+            name="fecha_creacion"
+            className="form-control"
+            value={newProduct.fecha_creacion}
             onChange={handleInputChange}
             required
           />

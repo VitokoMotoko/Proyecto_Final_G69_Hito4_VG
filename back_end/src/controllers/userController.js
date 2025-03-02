@@ -128,4 +128,24 @@ const savePurchase = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase };
+const updateUserRole = async (req, res) => {
+  const { id } = req.params;
+  const { role } = req.body;
+  try {
+    const result = await pool.query(
+      'UPDATE users SET role = $1 WHERE id = $2 RETURNING *',
+      [role, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error en updateUserRole:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+module.exports = { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole };

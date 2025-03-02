@@ -1,5 +1,5 @@
 const express = require('express');
-const { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase } = require('../controllers/userController');
+const { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole } = require('../controllers/userController');
 const { getProducts, getProductById, addProduct, deleteProduct } = require('../controllers/productController');
 const { verifyToken, verifyAdmin } = require('../middlewares/auth');
 const router = express.Router();
@@ -18,9 +18,10 @@ router.get('/:id/compras', getUserPurchases);
 router.get('/:id/details', getUserDetails);
 router.post('/:id/details', updateUserDetails);
 router.post('/compra', verifyToken, savePurchase); // Añadir la ruta para guardar la transacción
+router.put('/:id/role', verifyToken, verifyAdmin, updateUserRole); // Añadir la ruta para actualizar el rol del usuario
 
 // Rutas de administración
-router.post('/products', verifyAdmin, addProduct);
-router.delete('/products/:id', verifyAdmin, deleteProduct);
+router.post('/products', verifyToken, verifyAdmin, addProduct);
+router.delete('/products/:id', verifyToken, verifyAdmin, deleteProduct);
 
 module.exports = router;

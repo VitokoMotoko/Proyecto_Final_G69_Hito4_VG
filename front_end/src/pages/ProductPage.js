@@ -67,25 +67,27 @@ const ProductPage = () => {
       alert('Debes iniciar sesión para dejar un comentario.');
       return;
     }
-
+  
     if (!newComment.trim() || rating <= 0) {
       alert('Por favor, ingresa un comentario y una calificación válida.');
       return;
     }
-
+  
     try {
+      const token = localStorage.getItem('token'); // Obtener el token del localStorage
       const response = await fetch(`http://localhost:4000/api/products/${id}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Incluir el token en la solicitud
         },
         body: JSON.stringify({ comentario: newComment, calificacion: rating }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Error al enviar el comentario');
       }
-
+  
       const newCommentData = await response.json();
       setComments([...comments, newCommentData]);
       setNewComment('');

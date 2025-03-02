@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import '../styles/Home.css';
+import '../styles/Home.css'; // Asegúrate de que los estilos de Home.css se apliquen aquí también
 
 const Productos = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +21,7 @@ const Productos = () => {
         </ul>
       </aside>
       <main className="products-container">
-        <div className="row justify-content-center">
+        <div className="products-grid"> {/* Cambiado a products-grid */}
           {products.map((product, index) => (
             <ProductCard
               key={index}

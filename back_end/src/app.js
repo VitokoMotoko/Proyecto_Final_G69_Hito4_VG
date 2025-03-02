@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, '../../front_end/public')));
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const imageRoutes = require('./routes/imageRoutes');
+
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/images', imageRoutes);

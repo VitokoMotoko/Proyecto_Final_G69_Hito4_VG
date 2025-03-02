@@ -25,6 +25,10 @@ const addProductComment = async (req, res) => {
   const { comentario, calificacion } = req.body;
   const { userId } = req;
 
+  if (!userId) {
+    return res.status(403).json({ error: 'Usuario no autenticado' });
+  }
+
   const result = await pool.query(
     'INSERT INTO comentarios (id_user, id_producto, comentario, calificacion) VALUES ($1, $2, $3, $4) RETURNING *',
     [userId, id, comentario, calificacion]
@@ -35,11 +39,10 @@ const addProductComment = async (req, res) => {
 
 const addProduct = async (req, res) => {
   try {
-    const { nombre, descripcion, precio, stock, image } = req.body;
-    const fecha_creacion = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    const { nombre, descripcion, precio, stock, image, fecha_creacion } = req.body;
 
     // Validaciones
-    if (!nombre || !descripcion || !precio || isNaN(precio) || !stock || isNaN(stock) || !image) {
+    if (!nombre || !descripcion || !precio || isNaN(precio) || !stock || isNaN(stock) || !image || !fecha_creacion) {
       return res.status(400).json({ error: 'Todos los campos son obligatorios y deben ser válidos' });
     }
 
@@ -64,4 +67,50 @@ const deleteProduct = async (req, res) => {
   res.json(result.rows[0]);
 };
 
-module.exports = { getProducts, getProductById, getProductComments, addProductComment, addProduct, deleteProduct };
+const getRecentProducts = async (req, res) => {
+  try {
+    console.log('Solicitud recibida en /api/products/recent');
+    const result = await pool.query('SELECT * FROM productos ORDER BY fecha_creacion DESC LIMIT 6');
+    console.log('Resultado de la consulta:', result.rows);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener productos recientes:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+const getBestSellingProducts = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT p.*, SUM(cp.cantidad) AS total_vendidos
+      FROM productos p
+      JOIN carrito_productos cp ON p.id_producto = cp.id_producto
+      GROUP BY p.id_producto
+      ORDER BY total_vendidos DESC
+      LIMIT 6
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener productos más vendidos:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+const getTopRatedProducts = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT p.*, COUNT(c.id_comentario) AS total_comentarios
+      FROM productos p
+      JOIN comentarios c ON p.id_producto = c.id_producto
+      GROUP BY p.id_producto
+      ORDER BY total_comentarios DESC
+      LIMIT 6
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener productos mejor valorados:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+module.exports = { getProducts, getProductById, getProductComments, addProductComment, addProduct, deleteProduct, getRecentProducts, getBestSellingProducts, getTopRatedProducts };

@@ -1,4 +1,3 @@
-/* Estilos para el componente Home */
 .home-container {
   display: flex;
   height: calc(100vh - 56px - 56px); /* Altura total menos el navbar y el footer */
@@ -15,6 +14,10 @@
   width: 80%;
   padding: 1rem;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .products-container h2 {
@@ -34,17 +37,19 @@
 }
 
 .card {
-  width: 150px; /* Ajusta el tamaño de las tarjetas */
-  height: 180px; /* Ajusta la altura de las tarjetas */
-  margin: 0.25rem; /* Reduce el margen para acercar las tarjetas */
+  width: 200px; /* Ajusta el tamaño de las tarjetas */
+  height: 300px; /* Ajusta la altura de las tarjetas */
+  margin: 0.5rem; /* Ajusta el margen para separar las tarjetas */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* Centra el contenido horizontalmente */
+  align-items: center;
+  text-align: center; /* Asegura que el contenido esté centrado */
 }
 
 .card img {
-  height: 100px; /* Ajusta la altura de las imágenes */
+  width: 100%;
+  height: 150px; /* Ajusta la altura de las imágenes */
   object-fit: cover;
 }
 
@@ -58,4 +63,11 @@
 
 .card button {
   align-self: center; /* Centra el botón */
+  margin-top: auto; /* Empuja el botón hacia el final de la tarjeta */
+}
+
+.error-message, .no-products-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ff0000;
 }
