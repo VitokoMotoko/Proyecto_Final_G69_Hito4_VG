@@ -6,7 +6,7 @@
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-left: auto; /* Mueve el logo al extremo derecho */
+  margin-right: auto; /* Mueve el logo al extremo izquierdo */
 }
 
 .nav-link {

@@ -1,0 +1,43 @@
+/* src/styles/MisCompras.css */
+
+.mis-compras-container {
+    padding: 2rem;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .no-compras-message {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .compras-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .compra-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    width: calc(33.333% - 1rem); /* Tres elementos por fila */
+    box-sizing: border-box;
+  }
+  
+  .compra-item h3 {
+    margin-top: 0;
+  }
+  
+  .compra-item ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .compra-item ul li {
+    margin-bottom: 0.5rem;
+  }

@@ -30,35 +30,23 @@ const Navbar = () => {
                 <Link className="nav-link" to="/">Home</Link>
               </li>
             )}
-            {location.pathname !== '/productos' && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/productos">Productos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/quienes-somos">Quienes Somos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contacto">Contacto</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/carrito">Carrito ({cart.length})</Link>
+            </li>
+            {isAuthenticated && (
               <li className="nav-item">
-                <Link className="nav-link" to="/productos">Productos</Link>
+                <Link className="nav-link" to="/mi-perfil">Mi Perfil</Link>
               </li>
             )}
-            {isAuthenticated && user.role === 'admin' && (
-              <li className="nav-item">
-              <Link className="nav-link" to="/mi-perfil">Mi Perfil</Link>
-            </li>
-          )}
-          {!isAuthenticated && (
-            <>
-              {location.pathname !== '/quienes-somos' && (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/quienes-somos">Quienes Somos</Link>
-                </li>
-              )}
-              {location.pathname !== '/contacto' && (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/contacto">Contacto</Link>
-                </li>
-              )}
-              {location.pathname !== '/carrito' && (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/carrito">Carrito ({cart.length})</Link>
-                </li>
-              )}
-            </>
-          )}
           </ul>
           <form className="form-inline my-2 my-lg-0 mx-3">
             <input className="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" />

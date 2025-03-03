@@ -1,5 +1,5 @@
 const express = require('express');
-const { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole, getAllUsers } = require('../controllers/userController');
+const { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole, getAllUsers, getUserValoraciones } = require('../controllers/userController');
 const { getProducts, getProductById, addProduct, deleteProduct } = require('../controllers/productController');
 const { verifyToken, verifyAdmin } = require('../middlewares/auth');
 const router = express.Router();
@@ -19,6 +19,7 @@ router.get('/:id/details', getUserDetails);
 router.post('/:id/details', updateUserDetails);
 router.post('/compra', verifyToken, savePurchase); // Añadir la ruta para guardar la transacción
 router.put('/:id/role', verifyToken, verifyAdmin, updateUserRole); // Añadir la ruta para actualizar el rol del usuario
+router.get('/:id/valoraciones', getUserValoraciones);
 
 // Ruta para obtener todos los usuarios
 router.get('/', verifyToken, verifyAdmin, getAllUsers);

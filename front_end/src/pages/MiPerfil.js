@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import '../styles/MiPerfil.css';
 import { GlobalContext } from '../context/GlobalState';
-import MProductos from './MProductos'; // Importa el componente MProductos
+import MProductos from './MProductos';
+import MisCompras from '../components/MisCompras';
+import MisValoraciones from '../components/MisValoraciones'; 
 
 const MiPerfil = () => {
   const [state] = useContext(GlobalContext);
@@ -65,20 +67,6 @@ const MiPerfil = () => {
   
     if (user && user.role === 'admin') {
       fetchUsers();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user && user.role === 'admin') {
-      fetch('http://localhost:4000/api/users')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Error al obtener usuarios');
-          }
-          return response.json();
-        })
-        .then(data => setUsers(data))
-        .catch(error => console.error('Error al obtener usuarios:', error));
     }
   }, [user]);
 
@@ -166,6 +154,10 @@ const MiPerfil = () => {
     return new Date(dateString).toLocaleDateString('es-CL', options);
   };
 
+  if (!user) {
+    return <div>Por favor, inicia sesión para ver tu perfil.</div>;
+  }
+
   return (
     <div className="mi-perfil-container">
       <aside className="menu-container">
@@ -228,6 +220,8 @@ const MiPerfil = () => {
             )}
           </div>
         )}
+        {activeSection === 'compras' && <MisCompras />} {/* Agrega esta línea */}
+        {activeSection === 'valoraciones' && <MisValoraciones />} {/* Agrega esta línea */}
         {activeSection === 'eliminar-productos' && (
           <div className="profile-section">
             <h2>Eliminar Productos</h2>
@@ -254,9 +248,7 @@ const MiPerfil = () => {
                   <p>Email: {user.email}</p>
                   <p>Rol: {user.role}</p>
                   <button className="btn btn-primary" onClick={() => handleRoleChange(user.id, user.role === 'admin' ? 'user' : 'admin')}>
-                    {user.role === 'admin'
-                      ? 'Convertir a Usuario'
-                      : 'Convertir a Admin'}
+                    {user.role === 'admin' ? 'Convertir a Usuario' : 'Convertir a Admin'}
                   </button>
                   <button className="btn btn-danger" onClick={() => handleDeleteUser(user.id)}>Eliminar</button>
                 </div>
@@ -276,3 +268,6 @@ const MiPerfil = () => {
 };
 
 export default MiPerfil;
+
+
+

@@ -1,0 +1,32 @@
+.mis-valoraciones-container {
+    padding: 2rem;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .no-valoraciones-message {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .valoraciones-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .valoracion-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    width: calc(33.333% - 1rem); /* Tres elementos por fila */
+    box-sizing: border-box;
+  }
+  
+  .valoracion-item h3 {
+    margin-top: 0;
+  }

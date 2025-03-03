@@ -148,6 +148,17 @@ const updateUserRole = async (req, res) => {
   }
 };
 
+const getUserValoraciones = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('SELECT * FROM comentarios WHERE id_user = $1', [id]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener las valoraciones del usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
 const getAllUsers = async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM users');
@@ -158,4 +169,4 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole, getAllUsers };
+module.exports = { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole, getAllUsers, getUserValoraciones };
