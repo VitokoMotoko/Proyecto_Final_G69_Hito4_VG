@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/MProductos.css';
 
 const MProductos = () => {
-  const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     nombre: '',
     descripcion: '',
@@ -11,12 +10,6 @@ const MProductos = () => {
     image: '',
     fecha_creacion: new Date().toISOString().split('T')[0] // Fecha actual por defecto
   });
-
-  useEffect(() => {
-    fetch('http://localhost:4000/api/products')
-      .then(response => response.json())
-      .then(data => setProducts(data));
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,33 +32,15 @@ const MProductos = () => {
 
     if (response.ok) {
       const product = await response.json();
-      setProducts([...products, product]);
       setNewProduct({ nombre: '', descripcion: '', precio: '', stock: 100, image: '', fecha_creacion: new Date().toISOString().split('T')[0] });
     } else {
       console.error('Error al agregar producto:', response.statusText);
     }
   };
 
-  const handleDeleteProduct = async (id) => {
-    const token = localStorage.getItem('token');
-
-    const response = await fetch(`http://localhost:4000/api/products/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-
-    if (response.ok) {
-      setProducts(products.filter(product => product.id_producto !== id));
-    } else {
-      console.error('Error al eliminar producto:', response.statusText);
-    }
-  };
-
   return (
     <div className="mproductos-container">
-      <h1>Administrar Productos</h1>
+      <h1>Crear Producto</h1>
       <form onSubmit={handleAddProduct} className="add-product-form">
         <div className="form-group">
           <label htmlFor="nombre">Nombre</label>
@@ -140,17 +115,6 @@ const MProductos = () => {
         </div>
         <button type="submit" className="btn btn-primary">Agregar Producto</button>
       </form>
-      <div className="product-list">
-        {products.map(product => (
-          <div key={product.id_producto} className="product-item">
-            <p><strong>{product.nombre}</strong></p>
-            <p>{product.descripcion}</p>
-            <p>Precio: ${product.precio}</p>
-            <img src={product.image} alt={product.nombre} />
-            <button className="btn btn-danger" onClick={() => handleDeleteProduct(product.id_producto)}>Eliminar</button>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

@@ -148,4 +148,14 @@ const updateUserRole = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole };
+const getAllUsers = async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM users');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener usuarios:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+module.exports = { createUser, loginUser, getUserPurchases, getUserDetails, updateUserDetails, savePurchase, updateUserRole, getAllUsers };
